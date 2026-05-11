@@ -1,5 +1,6 @@
 package introduction;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -8,7 +9,10 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.apache.commons.io.FileSystemUtils;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,12 +40,14 @@ public class BrokenLinks {
 			conn.setRequestMethod("HEAD");
 			conn.connect();
 			int respCpde=conn.getResponseCode();
-			
 			System.out.println(respCpde);
 
 			a.assertTrue(respCpde<400,"the link with text "+link.getText()+" is broken with code "+respCpde);
 			
+			File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 			
+			FileUtils.copyFile(src,new File("E:\\Learning\\Selenium\\New folder/screenshot.png"));
+
 
 		}
 		
