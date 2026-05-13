@@ -48,7 +48,6 @@ public class BrokenLinks {
 			
 			FileUtils.copyFile(src,new File("E:\\Learning\\Selenium\\New folder/screenshot.png"));
 
-
 		}
 		
 		
