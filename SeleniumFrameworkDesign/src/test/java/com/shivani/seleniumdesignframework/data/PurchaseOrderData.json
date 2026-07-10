@@ -1,0 +1,16 @@
+[
+	{
+		"email":"test@quality.com",
+		"password":"@Test000",
+		"requiredProduct":"ZARA COAT 3"
+	}
+	
+	,
+	
+	{
+		"email":"test1@quality.com",
+		"password":"@Test001",
+		"requiredProduct":"ADIDAS ORIGINAL"		
+	}
+	
+]
