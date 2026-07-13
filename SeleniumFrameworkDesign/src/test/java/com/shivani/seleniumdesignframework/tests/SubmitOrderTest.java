@@ -1,10 +1,14 @@
 package com.shivani.seleniumdesignframework.tests;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -92,7 +96,7 @@ public class SubmitOrderTest extends BaseTest{
 //		map1.put("password", "@Test001");
 //		map1.put("requiredProduct", "ADIDAS ORIGINAL");
 		
-		List<HashMap<String, String>> data=getJsondataToMap(System.getProperty("user.dir")+"\\src\\test\\java\\com\\shivani\\seleniumdesignframework\\data\\PurchaseOrderData.json");
+		List<HashMap<String, String>> data=getJsonDataToMap(System.getProperty("user.dir")+"\\src\\test\\java\\com\\shivani\\seleniumdesignframework\\data\\PurchaseOrderData.json");
 		return new Object[][] {{data.get(0)},{data.get(1)}};
 	}
 	
@@ -102,6 +106,17 @@ public class SubmitOrderTest extends BaseTest{
 //		return new Object[][] {{"test@quality.com","@Test000","ZARA COAT 3"},{"test1@quality.com","@Test001","ADIDAS ORIGINAL"}};
 //		
 //	}
+	
+	
+	public String getScreenshot(String testCaseName) throws IOException {
+		
+		TakesScreenshot ts= (TakesScreenshot) driver;
+		File source= ts.getScreenshotAs(OutputType.FILE);
+		File destination=new File(System.getProperty("user.dir")+"//reports//"+testCaseName+".png");
+		
+		FileUtils.copyFile(source,destination );
+		return System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+	}
 	
 	
 

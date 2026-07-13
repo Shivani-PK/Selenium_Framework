@@ -25,7 +25,7 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
 public abstract  class BaseTest {
-	 private WebDriver driver;
+	 protected WebDriver driver;
 	 protected LoginPage loginPage;
 
 	public WebDriver initializeDriver() throws IOException {
@@ -55,16 +55,16 @@ public abstract  class BaseTest {
 
 	}
 	
-	public List<HashMap<String, String>> getJsondataToMap(String filePath) throws IOException {
+	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
 		
 		//read json to string
 		String jsonContent= FileUtils.readFileToString(new File(filePath),
 				StandardCharsets.UTF_8);
 		
-		//string to hashmap (Jackson Databind) --> it converts string to hashmap and then stores the hashmap in a list
+		//string to hashmap using ObjectMapper (Jackson Databind) --> used to read and write Json
 		ObjectMapper mapper=new ObjectMapper();
 		List<HashMap<String, String>> data= mapper.readValue(jsonContent, new TypeReference<List<HashMap<String,String>>>() {
-		});
+		});	//read jsonContent, convert it into given structure --> here it converts into a list of hashmap.
 		
 		return data;
 		//{map,map}
