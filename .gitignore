@@ -1,1 +1,9 @@
 /.metadata/
+
+# Extent Reports and TestNG Outputs
+SeleniumFrameworkDesign/test-output/
+SeleniumFrameworkDesign/reports/
+
+# Standard Java and Maven compile outputs
+SeleniumFrameworkDesign/target/
+*.class

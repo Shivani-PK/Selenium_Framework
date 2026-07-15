@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -28,12 +30,16 @@ public abstract  class BaseTest {
 	 protected WebDriver driver;
 	 protected LoginPage loginPage;
 
+	//initialize driver
 	public WebDriver initializeDriver() throws IOException {
-
+		
+		
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
 				+ "\\src\\main\\java\\com\\shivani\\seleniumdesignframework\\resources\\GlobalData.properties");
 		prop.load(fis);
+		
+		//getting global data properties 
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equalsIgnoreCase("chrome")) {
@@ -55,6 +61,18 @@ public abstract  class BaseTest {
 
 	}
 	
+	// capture screenshot on failed test
+	public String getScreenshot(String testCaseName,WebDriver driver) throws IOException {
+		
+		TakesScreenshot ts= (TakesScreenshot) driver;
+		File source= ts.getScreenshotAs(OutputType.FILE);
+		File destination=new File(System.getProperty("user.dir")+"//reports//"+testCaseName+".png");
+		
+		FileUtils.copyFile(source,destination );
+		return System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+	}
+	
+	//transform data from json to hashmap
 	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
 		
 		//read json to string
@@ -81,6 +99,8 @@ public abstract  class BaseTest {
 	
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
-		driver.quit();
+		if (driver != null) {
+	        driver.quit();
+	    }
 	}	
 }
