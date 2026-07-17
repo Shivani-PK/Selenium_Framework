@@ -18,13 +18,14 @@ import com.shivani.seleniumdesignframework.pageobjects.Header;
 import com.shivani.seleniumdesignframework.pageobjects.HomePage;
 import com.shivani.seleniumdesignframework.pageobjects.LoginPage;
 import com.shivani.seleniumdesignframework.testcomponents.BaseTest;
+import com.shivani.seleniumdesignframework.testcomponents.RetryMechanism;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 public class ErrorValidationTest extends BaseTest{
 
 
-	@Test (groups = {"ErrorHandling"})
+	@Test (groups = {"ErrorHandling"},retryAnalyzer = RetryMechanism.class )
 	public void loginErrorValidation() throws IOException
 	{
 	
@@ -37,7 +38,7 @@ public class ErrorValidationTest extends BaseTest{
 		//instantiate driver and login to application	
 		HomePage homePage=loginPage.loginApplication(email, password);
 		String actualErrorMessage= loginPage.getErrorMessage();
-		String expectedErrorMessage="Incorrect email or password.";
+		String expectedErrorMessage="Incorrect email  password.";
 		
 		//System.out.println(actualErrorMessage);
 		Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
