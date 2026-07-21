@@ -54,7 +54,7 @@ public class SubmitOrderTest extends BaseTest{
 		
 		//grab cart product list and check if required product is there and click checkout
 		boolean match=cartPage.verifyProductDisplay(input.get("requiredProduct"));
-		Assert.assertTrue(match);	
+		Assert.assertTrue(match);
 		CheckOutPage checkOutpage= cartPage.goToCheckoutPage();
 		
 		//fill out checkout page details and place order		

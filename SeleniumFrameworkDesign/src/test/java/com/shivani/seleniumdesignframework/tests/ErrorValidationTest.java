@@ -38,7 +38,7 @@ public class ErrorValidationTest extends BaseTest{
 		//instantiate driver and login to application	
 		HomePage homePage=loginPage.loginApplication(email, password);
 		String actualErrorMessage= loginPage.getErrorMessage();
-		String expectedErrorMessage="Incorrect email  password.";
+		String expectedErrorMessage="Incorrect email or password.";
 		
 		//System.out.println(actualErrorMessage);
 		Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
